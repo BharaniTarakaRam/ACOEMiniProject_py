@@ -1,0 +1,44 @@
+import json
+
+import sys
+
+import unittest
+
+from src import test_src
+
+class calculationTest(unittest.TestCase):
+
+    def setUp(self):
+        self.event = {"numbers": [10, 5]}
+        self.a = 10
+        self.b = 5
+
+    def test_lambda_handler(self):
+        result = test_src.lambda_handler(self.event, '')
+        data = json.loads(result["body"])
+        print("data: ", data)
+        expected_response = {"add": 15, "mult": 50, "sub": 5, "div": 2.0, "suq": 100}
+        self.assertEqual(data, expected_response)
+
+    def test_sum(self):
+       result = test_src.calc_add(self.a, self.b)
+       self .assertEqual(result, self.a + self.b)
+
+
+    def test_func_multiply (self):
+        result = test_src.calc_mul(self.a, self.b)
+        self.assertEqual(result, self.a * self.b)
+
+    def test_func_squr (self):
+        result = test_src.calc_sub(self.a, self.b)
+        self.assertEqual(result,self.a - self.b)
+
+    def test_func_div(self):
+        result = test_src.calc_div(self.a, self.b)
+        self.assertEqual(result,self.a // self.b)
+
+    def test_func_squ(self):
+        result = test_src.calc_squ(self.a)
+        self.assertEqual(result, self.a * self.a)
+
+
