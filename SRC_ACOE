@@ -1,0 +1,30 @@
+import json
+
+def lambda_handler(event, context):
+    print(event)
+    numbers = event['numbers']
+    response = json.dumps({"add" : calc_add(numbers[0], numbers[1]), "mult" : calc_mul(numbers[0], numbers[1]), "sub": calc_sub(numbers[0], numbers[1]),
+                           "div" : calc_div(numbers[0], numbers[1]), "suq" : calc_squ(numbers[0])})
+    #json.dumps:function converts a Python object into a json string.
+    return {
+        "statusCode": 200,
+        "body": response,
+    }
+
+def calc_add (a, b):
+    return a+b
+
+
+def calc_mul (a, b):
+    return a*b
+
+def calc_sub(a, b):
+    return a-b
+def calc_div(a, b):
+    return a//b
+
+def calc_squ(a):
+    return a*a
+
+
+
